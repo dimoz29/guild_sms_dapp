@@ -4,6 +4,8 @@ import { useEffect } from 'react';
 import smsOracleAbi from './contracts/SMSOracle.json'
 
 function SMSForm() {
+  const [isWalletConnected, setIsWalletConnected] = useState(false);
+  const [customerAddress, setCustomerAddress] = useState(null);
   const { library } = ethers();
   const [contractAddress, setContractAddress] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -11,10 +13,9 @@ function SMSForm() {
   const [status, setStatus] = useState("Idle");
   const [error, setError] = useState(null);
 
-  const contractAddress = '0x006202d2E96abeb270beAba53aBeE242f3353Af9';
-  const contractABI = abi.abi;
 
-  
+
+
   const checkIfWalletIsConnected = async () => {
     try {
       if (window.ethereum) {
